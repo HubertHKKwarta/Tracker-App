@@ -68,6 +68,12 @@ namespace expensisapp
             {
                 MessageBox.Show("Please fill all blank fields", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(Expenses_cost.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Please enter only numeric values in the income field.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Expenses_cost.Focus(); // Set focus back to the income input field
+                return;
+            }
             else
             {
                 using (SqlConnection connect = new SqlConnection(stringConnection))
@@ -117,6 +123,12 @@ namespace expensisapp
             if (Expenses_category.SelectedIndex == -1 || Expenses_item.Text == "" || Expenses_cost.Text == "")
             {
                 MessageBox.Show("Please select item first", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(Expenses_cost.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Please enter only numeric values in the income field.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Expenses_cost.Focus(); // Set focus back to the income input field
+                return;
             }
             else
             {
@@ -190,7 +202,16 @@ namespace expensisapp
                     Expenses_category.SelectedItem = row.Cells[1].Value.ToString();
                     Expenses_description.Text = row.Cells[2].Value.ToString();
                     Expenses_item.Text = row.Cells[3].Value.ToString();
-                    Expenses_cost.Text = row.Cells[4].Value.ToString();
+                    if (row.Cells[4].Value != null)
+                    {
+                        // Try to parse the cell value as a decimal
+                        if (decimal.TryParse(row.Cells[4].Value.ToString(), out decimal incomeValue))
+                        {
+                            // Format the decimal value to two decimal places
+                            Expenses_cost.Text = incomeValue.ToString("N2");
+
+                        }
+                    }
 
                     string dateValue = row.Cells[5].Value.ToString();
                     if (!string.IsNullOrEmpty(dateValue))

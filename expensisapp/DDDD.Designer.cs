@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -57,12 +60,16 @@
             this.label17 = new System.Windows.Forms.Label();
             this.expenses_todayexpenses = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.label20 = new System.Windows.Forms.Label();
             this.expenses_totalexpenses = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.income_totalincome = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.expenses_bilans = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -76,6 +83,8 @@
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel15.SuspendLayout();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -367,6 +376,9 @@
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.White;
+            this.panel11.Controls.Add(this.chart1);
+            this.panel11.Controls.Add(this.label2);
+            this.panel11.Controls.Add(this.panel13);
             this.panel11.Controls.Add(this.label20);
             this.panel11.Controls.Add(this.label19);
             this.panel11.Controls.Add(this.panel12);
@@ -375,6 +387,16 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(978, 166);
             this.panel11.TabIndex = 2;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(265, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(117, 23);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Total Expenses";
             // 
             // label19
             // 
@@ -390,26 +412,16 @@
             // 
             this.panel12.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel12.Controls.Add(this.expenses_totalexpenses);
-            this.panel12.Location = new System.Drawing.Point(507, 49);
+            this.panel12.Location = new System.Drawing.Point(269, 49);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(453, 109);
+            this.panel12.Size = new System.Drawing.Size(208, 109);
             this.panel12.TabIndex = 3;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(514, 10);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(117, 23);
-            this.label20.TabIndex = 8;
-            this.label20.Text = "Total Expenses";
             // 
             // expenses_totalexpenses
             // 
             this.expenses_totalexpenses.AutoSize = true;
             this.expenses_totalexpenses.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expenses_totalexpenses.Location = new System.Drawing.Point(222, 51);
+            this.expenses_totalexpenses.Location = new System.Drawing.Point(85, 51);
             this.expenses_totalexpenses.Name = "expenses_totalexpenses";
             this.expenses_totalexpenses.Size = new System.Drawing.Size(19, 23);
             this.expenses_totalexpenses.TabIndex = 7;
@@ -421,18 +433,65 @@
             this.panel15.Controls.Add(this.income_totalincome);
             this.panel15.Location = new System.Drawing.Point(24, 49);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(453, 109);
+            this.panel15.Size = new System.Drawing.Size(208, 109);
             this.panel15.TabIndex = 0;
             // 
             // income_totalincome
             // 
             this.income_totalincome.AutoSize = true;
             this.income_totalincome.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.income_totalincome.Location = new System.Drawing.Point(219, 51);
+            this.income_totalincome.Location = new System.Drawing.Point(85, 51);
             this.income_totalincome.Name = "income_totalincome";
             this.income_totalincome.Size = new System.Drawing.Size(19, 23);
             this.income_totalincome.TabIndex = 5;
             this.income_totalincome.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(503, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 23);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Bilans";
+//            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel13.Controls.Add(this.expenses_bilans);
+            this.panel13.Location = new System.Drawing.Point(507, 49);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(208, 109);
+            this.panel13.TabIndex = 9;
+ //           this.panel13.Paint += new System.Windows.Forms.PaintEventHandler(this.panel13_Paint);
+            // 
+            // expenses_bilans
+            // 
+            this.expenses_bilans.AutoSize = true;
+            this.expenses_bilans.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expenses_bilans.Location = new System.Drawing.Point(85, 51);
+            this.expenses_bilans.Name = "expenses_bilans";
+            this.expenses_bilans.Size = new System.Drawing.Size(19, 23);
+            this.expenses_bilans.TabIndex = 7;
+            this.expenses_bilans.Text = "0";
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(735, 10);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(225, 152);
+            this.chart1.TabIndex = 12;
+            this.chart1.Text = "chart1";
             // 
             // DDDD
             // 
@@ -469,6 +528,9 @@
             this.panel12.PerformLayout();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -510,5 +572,9 @@
         private System.Windows.Forms.Label expenses_totalexpenses;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Label income_totalincome;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label expenses_bilans;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

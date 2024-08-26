@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.Remoting.Contexts;
 
 namespace expensisapp
 {
@@ -24,6 +25,7 @@ namespace expensisapp
             incomeThisMonthincome();
             incomeThisMYearincome();
             totalincome();
+            Bilanse();
 
 
             expensesTodaycost();
@@ -41,12 +43,13 @@ namespace expensisapp
                 Invoke((MethodInvoker)refreshData);
                 return;
             }
-            InitializeComponent();
+            
             incomeTodayincome();
             incomeYesterdayincome();
             incomeThisMonthincome();
             incomeThisMYearincome();
             totalincome();
+            Bilanse();
 
 
             expensesTodaycost();
@@ -335,7 +338,44 @@ namespace expensisapp
             }
 
         }
+        public void Bilanse()
+        {
+            using (SqlConnection connect = new SqlConnection(stringConnection))
+            {
+                decimal totalincome = 0;
+                decimal totalcost = 0;
 
+                connect.Open();
+                string queryincome = "SELECT SUM(income) FROM income";
+                using (SqlCommand cmdincome = new SqlCommand(queryincome, connect))
+                {
+                    object resultincome = cmdincome.ExecuteScalar();
 
+                    if (resultincome != DBNull.Value)
+                    {
+                          totalincome = Convert.ToDecimal(resultincome);
+
+                    }
+
+                }
+
+                string querycost = "SELECT SUM(cost) FROM expenses";
+                using (SqlCommand cmd = new SqlCommand(querycost, connect))
+                {
+                    object resultcost = cmd.ExecuteScalar();
+
+                    if (resultcost != DBNull.Value)
+                    {
+                         totalcost = Convert.ToDecimal(resultcost);
+
+                    }
+
+                    
+                }
+
+                expenses_bilans.Text =  (totalincome - totalcost).ToString();
+                connect.Close();
+            }
+        }
     }
 }
